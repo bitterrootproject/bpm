@@ -1,0 +1,65 @@
+modules:
+
+  # backend:
+  #   path: /
+  #   actions:
+  #     manage:
+  #       cmd: uv run manage
+  #       # `manage` accepts extra args.
+  #       args: yes
+
+  #     dev:
+  #       cmd: uv run manage runserver
+
+  #     check:
+  #       cmd: uv run ruff check
+  #       git: yes
+      
+  #     lint:
+  #       cmd: uv run ruff check --fix
+  #       git: yes
+
+  #     format:
+  #       cmd: uv run ruff format
+  #       git: yes
+
+  #     demo:
+  #       cmd: zsh demo.zsh
+
+  # frontend:
+  #   path: /src/frontend
+  #   actions:
+  #     dev:
+  #       cmd: npm run dev
+
+  #     build:
+  #       cmd: npm run build
+  #       git: yes
+
+  #       # If an action is "watchable", put the "watch" variant here.
+  #       watch_cmd: npm run build:watch
+        
+  #     demo:
+  #       # cd: /
+  #       cmd: zsh demo.zsh
+  #       args: yes
+
+  one:
+    work_dir: /examples/dir1
+    actions:
+      demo:
+        cmd: zsh demo.zsh
+        bg: yes
+      rar:
+        cmd: zsh rar.zsh
+        work_dir: /examples/dir2
+  
+  two:
+    work_dir: /examples/dir2
+    actions:
+      demo:
+        cmd: zsh demo.zsh
+        work_dir: /examples/dir1
+        bg: yes
+      rar:
+        cmd: zsh rar.zsh

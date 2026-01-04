@@ -1,0 +1,46 @@
+[project]
+name = "bpm"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+    "environs>=14.5.0",
+    "gitpython>=3.1.46",
+    "pydantic>=2.12.5",
+    "pyyaml>=6.0.3",
+    "termcolor>=3.3.0",
+    "toml-rs>=0.2.2",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.scripts]
+cli = "bpm.cli:main"
+
+
+# Ruff settings
+
+[tool.ruff]
+# include = ["src/bitterroot/**/*.py"]
+include = ["bpm/**/*.py"]
+
+[tool.ruff.format]
+docstring-code-format = true
+indent-style = "space"
+line-ending = "lf"
+skip-magic-trailing-comma = false
+
+[tool.ruff.lint]
+select = [
+    "W291", "F401", "I"
+]
+[tool.ruff.lint.isort]
+combine-as-imports = true
+
+[dependency-groups]
+dev = [
+    "ruff>=0.14.10",
+]

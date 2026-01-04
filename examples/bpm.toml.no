@@ -1,0 +1,17 @@
+[modules.backend]
+path = "/"
+
+[modules.backend.actions]
+manage = { cmd = "uv run manage", args = true }
+dev = { cmd = "uv run manage runserver" }
+check = { cmd = "uv run ruff check" }
+lint = { cmd = "uv run ruff check --fix" }
+format = { cmd = "uv run ruff format" }
+
+
+[modules.frontend]
+path = "/src/frontend"
+
+[modules.frontend.actions]
+dev = { cmd = "npm run dev" }
+build = { cmd = "npm run build", watch_cmd = "npm run build:watch" }
