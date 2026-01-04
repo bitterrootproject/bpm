@@ -24,6 +24,7 @@ def rebase_path(new_root: Path | str, subdir: Path | str) -> Path:
     -------
     :returns Path: The rebased path. If the subdirectory was already relative to the new root, it's returned as-is.
     """
+
     # Temporarily convert thie subdir to a Path (if it isn't already).
     if not isinstance(subdir, Path):
         subdir = Path(subdir)
@@ -34,18 +35,10 @@ def rebase_path(new_root: Path | str, subdir: Path | str) -> Path:
     except ValueError:
         # In this case, the subdir is *not* already relative, so we need to fix it.
         pass
-    
 
-    # if (
-    #     (isinstance(subdir, Path) and subdir.relative_to(new_root))
-    #     or (not isinstance(subdir, Path) and Path(subdir).relative_to(new_root))
-    # ):
-    #     return Path(subdir)
-    
     # Root needs to be of type Path.
     if not isinstance(new_root, Path):
         new_root = Path(new_root)
-
 
     # Subdir needs to be a string, as we're doing some manual mangling.
     if not isinstance(subdir, str):
@@ -104,12 +97,12 @@ class Module(BaseModel):
         - `work_dir`: If each Action config does not manually set its working directory, set it to this Module's working directory.
         - `name`: Set the Action's name. The name's value is taken from the key defining this Action's config. Ex: From the config
           ```
-          { "actions": { "demo": { "cmd": "exit 0" }}}
+          {"actions": {"demo": {"cmd": "exit 0"}}}
           ```
           the name would be "demo".
         - `module_name`: Set this to the module's name. Helpful when trying to figure out what Module each Action is associated with.
         """
-        
+
         repo_root = get_git_repo_root()
 
         if not isinstance(data, dict):
@@ -143,7 +136,7 @@ class Module(BaseModel):
         """
         This *before validator* just rebases the working directory onto the git repository.
         """
-        
+
         assert isinstance(data, dict)
         repo_root = get_git_repo_root()
         data["work_dir"] = str(rebase_path(repo_root, data["work_dir"]))
@@ -154,7 +147,7 @@ class Module(BaseModel):
         """
         Make sure the configured working directory actually exists.
         """
-        
+
         if not self.work_dir.exists():
             repo_root = get_git_repo_root()
             raise ValueError(
@@ -179,11 +172,12 @@ class BPMConfig(BaseModel):
 
         - `name`: Set the Module's name. The name's value is taken from the key defining this Module's config. Ex: From the config
           ```
-          { "modules": { "demo": { ... }}}
+          {"modules": {"demo": {...}}}
           ```
           the name would be "demo".
 
         """
+
         assert isinstance(data, dict)
 
         # Grab the raw module data.

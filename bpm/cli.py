@@ -130,6 +130,10 @@ class ActionRunner:
             stream.close()
 
     def run(self):
+        """
+        Run the selected commands.
+        """
+
         if self.can_run_simultaneously:
             logger.info("Running all actions within the action group simultaneously.\n")
             try:
@@ -202,7 +206,9 @@ class ActionRunner:
                 self._kill_all_processes()
                 sys.exit(1)
         else:
-            logger.info("One or more actions within the action group cannot run simultaneously. Running them in series.")
+            logger.info(
+                "One or more actions within the action group cannot run simultaneously. Running them in series."
+            )
             for action in self.actions:
                 # Create a prefix for this action's output
                 # prefix = f"{action.module_name}.{action.name}"
@@ -224,14 +230,15 @@ class ActionRunner:
                         f"{e.strerror}: {missing_file}",
                         exiting=True,
                     )
-            
+
             print()
             logger.info("All processes completed")
 
-
-
     def _kill_all_processes(self):
-        """Kill all running child processes."""
+        """
+        Kill all running child processes.
+        """
+
         for action, proc in self.processes.items():
             try:
                 # Send SIGTERM first (graceful)
