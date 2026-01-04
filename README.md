@@ -1,4 +1,4 @@
-# bpm
+# Bitterroot Project Manager
 
 BPM is a simple, script-based monorepo helper tool. It was created for the Bitterroot Project to make managing the mixed-language monorepo more tolerable.
 
